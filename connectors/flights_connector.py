@@ -7,7 +7,12 @@ from pathlib import Path
 from typing import Any
 
 from config import FLIGHTS_PATH
-from connectors.base import LookupResult, LookupStatus, load_json_records
+from connectors.base import (
+    LookupResult,
+    LookupStatus,
+    humanize_record,
+    load_json_records,
+)
 
 _FLIGHT_NUMBER_PATTERN = re.compile(r"^[A-Z]{2}\d{1,4}$")
 
@@ -19,7 +24,7 @@ class FlightsConnector:
         self._records: list[dict[str, Any]] = load_json_records(path, "flights")
 
     def find(self, flight_number: str, flight_date: str) -> LookupResult:
-        """Find a flight by number and ISO date."""
+        """Find a flight by number and its scheduled departure date."""
         number = flight_number.strip().upper().replace(" ", "")
         day = flight_date.strip()
 
@@ -40,8 +45,12 @@ class FlightsConnector:
             )
 
         for record in self._records:
-            if record["flight_number"].upper() == number and record["date"] == day:
-                return LookupResult(status=LookupStatus.FOUND, record=record)
+            same_number = record["flight_number"].upper() == number
+            departs_that_day = record["departure"].startswith(day)
+            if same_number and departs_that_day:
+                return LookupResult(
+                    status=LookupStatus.FOUND, record=humanize_record(record)
+                )
 
         return LookupResult(
             status=LookupStatus.NOT_FOUND,

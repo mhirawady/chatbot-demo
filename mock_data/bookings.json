@@ -1,134 +1,139 @@
 {
+  "meta": {
+    "notes": "Segment status reflects the booking record, not live flight status. Cross-reference flights.json for cancellations. SSR codes: INFT = lap infant, UMNR = unaccompanied minor, WCHR = wheelchair assistance."
+  },
   "bookings": [
     {
-      "booking_reference": "MR7QX2",
-      "last_name": "Alvarez",
+      "pnr": "GH7X2P",
+      "created": "2026-06-14T10:22:00-06:00",
       "passengers": [
-        { "name": "Elena Alvarez", "type": "adult" },
-        { "name": "Mateo Alvarez", "type": "adult" }
+        { "first_name": "Marcus", "last_name": "Webb", "type": "adult", "ssrs": [] }
       ],
-      "fare_type": "Main Economy",
-      "booking_status": "confirmed",
-      "booked_on": "2026-08-14",
-      "loyalty_tier": "Gold",
+      "contact": { "email": "m.webb.denver@example.com", "phone": "+1-303-555-0142", "home_city": "Denver, CO" },
       "segments": [
-        {
-          "flight_number": "MR418",
-          "date": "2026-09-04",
-          "origin": "SFO",
-          "destination": "JFK",
-          "departure_time": "07:45",
-          "arrival_time": "16:20",
-          "cabin": "Main Economy",
-          "seats": ["14A", "14B"],
-          "checked_bags": 1
-        },
-        {
-          "flight_number": "MR419",
-          "date": "2026-09-11",
-          "origin": "JFK",
-          "destination": "SFO",
-          "departure_time": "18:10",
-          "arrival_time": "21:55",
-          "cabin": "Main Economy",
-          "seats": ["22C", "22D"],
-          "checked_bags": 1
-        }
-      ]
+        { "flight_number": "SH412", "date": "2026-07-09", "origin": "DEN", "destination": "SFO", "cabin": "economy", "status": "CONFIRMED" }
+      ],
+      "total_paid_usd": 189
     },
     {
-      "booking_reference": "MR3KP9",
-      "last_name": "Okonkwo",
-      "passengers": [{ "name": "Daniel Okonkwo", "type": "adult" }],
-      "fare_type": "Basic Economy",
-      "booking_status": "confirmed",
-      "booked_on": "2026-08-30",
-      "loyalty_tier": "Blue",
-      "segments": [
-        {
-          "flight_number": "MR226",
-          "date": "2026-09-02",
-          "origin": "ORD",
-          "destination": "SEA",
-          "departure_time": "11:30",
-          "arrival_time": "14:05",
-          "cabin": "Basic Economy",
-          "seats": [],
-          "checked_bags": 0
-        }
-      ]
-    },
-    {
-      "booking_reference": "MR8ZT5",
-      "last_name": "Nakamura",
+      "pnr": "K4LM89",
+      "created": "2026-05-30T15:47:00-06:00",
       "passengers": [
-        { "name": "Yuki Nakamura", "type": "adult" },
-        { "name": "Sora Nakamura", "type": "infant" }
+        { "first_name": "Priya", "last_name": "Sharma", "type": "adult", "ssrs": ["INFT"] },
+        { "first_name": "Aarav", "last_name": "Sharma", "type": "infant_lap", "age": 1, "ssrs": [] }
       ],
-      "fare_type": "Business",
-      "booking_status": "confirmed",
-      "booked_on": "2026-07-02",
-      "loyalty_tier": "Platinum",
+      "contact": { "email": "priya.sharma@example.com", "phone": "+1-720-555-0193", "home_city": "Denver, CO" },
       "segments": [
-        {
-          "flight_number": "MR901",
-          "date": "2026-09-06",
-          "origin": "LAX",
-          "destination": "NRT",
-          "departure_time": "13:15",
-          "arrival_time": "17:40",
-          "cabin": "Business",
-          "seats": ["2A"],
-          "checked_bags": 2
-        }
-      ]
+        { "flight_number": "SH412", "date": "2026-07-09", "origin": "DEN", "destination": "SFO", "cabin": "economy", "status": "CONFIRMED" }
+      ],
+      "total_paid_usd": 189
     },
     {
-      "booking_reference": "MR5WD1",
-      "last_name": "Baptiste",
-      "passengers": [{ "name": "Chantal Baptiste", "type": "adult" }],
-      "fare_type": "Premium",
-      "booking_status": "cancelled",
-      "booked_on": "2026-06-19",
-      "loyalty_tier": "Silver",
-      "segments": [
-        {
-          "flight_number": "MR512",
-          "date": "2026-09-03",
-          "origin": "MIA",
-          "destination": "LHR",
-          "departure_time": "20:05",
-          "arrival_time": "09:50",
-          "cabin": "Premium",
-          "seats": ["8F"],
-          "checked_bags": 1
-        }
-      ]
-    },
-    {
-      "booking_reference": "MR2HN8",
-      "last_name": "Fitzgerald",
+      "pnr": "R2D4C6",
+      "created": "2026-04-18T09:05:00-06:00",
       "passengers": [
-        { "name": "Rowan Fitzgerald", "type": "adult" },
-        { "name": "Imogen Fitzgerald", "type": "child" }
+        { "first_name": "Diego", "last_name": "Ramirez", "type": "adult", "ssrs": [] },
+        { "first_name": "Carmen", "last_name": "Ramirez", "type": "adult", "ssrs": [] },
+        { "first_name": "Sofia", "last_name": "Ramirez", "type": "child", "age": 9, "ssrs": [] },
+        { "first_name": "Mateo", "last_name": "Ramirez", "type": "child", "age": 7, "ssrs": [] },
+        { "first_name": "Luna", "last_name": "Ramirez", "type": "child", "age": 4, "ssrs": [] }
       ],
-      "fare_type": "Main Economy",
-      "booking_status": "confirmed",
-      "booked_on": "2026-08-28",
-      "loyalty_tier": "Blue",
+      "contact": { "email": "ramirez.familia@example.com", "phone": "+1-303-555-0177", "home_city": "Denver, CO" },
       "segments": [
-        {
-          "flight_number": "MR334",
-          "date": "2026-09-02",
-          "origin": "DEN",
-          "destination": "ATL",
-          "departure_time": "06:20",
-          "arrival_time": "11:35",
-          "cabin": "Main Economy",
-          "seats": ["19D", "19E"],
-          "checked_bags": 2
-        }
-      ]
+        { "flight_number": "SH301", "date": "2026-07-09", "origin": "DEN", "destination": "LAX", "cabin": "economy", "status": "CONFIRMED" }
+      ],
+      "total_paid_usd": 795
+    },
+    {
+      "pnr": "QW8ZT1",
+      "created": "2026-06-28T11:30:00-06:00",
+      "passengers": [
+        { "first_name": "Sarah", "last_name": "Chen", "type": "adult", "ssrs": [] }
+      ],
+      "contact": { "email": "sarah.chen.co@example.com", "phone": "+1-720-555-0121", "home_city": "Denver, CO" },
+      "segments": [
+        { "flight_number": "SH208", "date": "2026-07-09", "origin": "DEN", "destination": "JFK", "cabin": "economy", "status": "CONFIRMED" }
+      ],
+      "total_paid_usd": 249
+    },
+    {
+      "pnr": "B7N3RD",
+      "created": "2026-07-02T08:12:00-06:00",
+      "passengers": [
+        { "first_name": "Sarah", "last_name": "Chen", "type": "adult", "ssrs": [] }
+      ],
+      "contact": { "email": "sarah.chen.co@example.com", "phone": "+1-720-555-0121", "home_city": "Denver, CO" },
+      "segments": [
+        { "flight_number": "SH902", "date": "2026-07-16", "origin": "DEN", "destination": "AUS", "cabin": "economy", "status": "CONFIRMED" }
+      ],
+      "total_paid_usd": 169
+    },
+    {
+      "pnr": "UM4KDX",
+      "created": "2026-06-20T14:55:00-06:00",
+      "passengers": [
+        { "first_name": "David", "last_name": "Okafor", "type": "child", "age": 12, "ssrs": ["UMNR"] }
+      ],
+      "contact": {
+        "email": "amara.okafor@example.com",
+        "phone": "+1-303-555-0166",
+        "home_city": "Denver, CO",
+        "guardian": { "name": "Amara Okafor", "relationship": "mother", "phone": "+1-303-555-0166" },
+        "receiving_adult_at_destination": { "name": "Chidi Okafor", "relationship": "grandfather", "phone": "+1-917-555-0134" }
+      },
+      "segments": [
+        { "flight_number": "SH208", "date": "2026-07-09", "origin": "DEN", "destination": "JFK", "cabin": "economy", "status": "CONFIRMED" }
+      ],
+      "total_paid_usd": 299
+    },
+    {
+      "pnr": "WC3H3L",
+      "created": "2026-05-11T16:40:00-06:00",
+      "passengers": [
+        { "first_name": "Gloria", "last_name": "Fontenot", "type": "adult", "age": 74, "ssrs": ["WCHR"] }
+      ],
+      "contact": { "email": "g.fontenot@example.com", "phone": "+1-504-555-0158", "home_city": "Metairie, LA" },
+      "segments": [
+        { "flight_number": "SH772", "date": "2026-07-09", "origin": "DEN", "destination": "MSY", "cabin": "economy", "status": "CONFIRMED" }
+      ],
+      "total_paid_usd": 199
+    },
+    {
+      "pnr": "JP99AA",
+      "created": "2026-06-05T12:18:00-07:00",
+      "passengers": [
+        { "first_name": "James", "last_name": "Park", "type": "adult", "ssrs": [] }
+      ],
+      "contact": { "email": "jpark.sf@example.com", "phone": "+1-415-555-0129", "home_city": "San Francisco, CA" },
+      "segments": [
+        { "flight_number": "SH421", "date": "2026-07-09", "origin": "SFO", "destination": "DEN", "cabin": "economy", "status": "FLOWN" },
+        { "flight_number": "SH536", "date": "2026-07-09", "origin": "DEN", "destination": "ORD", "cabin": "economy", "status": "CONFIRMED" }
+      ],
+      "total_paid_usd": 289
+    },
+    {
+      "pnr": "FC1STA",
+      "created": "2026-06-25T09:50:00-07:00",
+      "passengers": [
+        { "first_name": "Eleanor", "last_name": "Whitfield", "type": "adult", "ssrs": [] }
+      ],
+      "contact": { "email": "e.whitfield@example.com", "phone": "+1-206-555-0102", "home_city": "Seattle, WA" },
+      "segments": [
+        { "flight_number": "SH150", "date": "2026-07-09", "origin": "DEN", "destination": "SEA", "cabin": "first", "status": "CONFIRMED" }
+      ],
+      "total_paid_usd": 519
+    },
+    {
+      "pnr": "OK4NOW",
+      "created": "2026-07-01T17:25:00-06:00",
+      "passengers": [
+        { "first_name": "Alex", "last_name": "Rivera", "type": "adult", "ssrs": [] }
+      ],
+      "contact": { "email": "a.rivera.den@example.com", "phone": "+1-720-555-0110", "home_city": "Denver, CO" },
+      "segments": [
+        { "flight_number": "SH530", "date": "2026-07-10", "origin": "DEN", "destination": "ORD", "cabin": "economy", "status": "CONFIRMED" }
+      ],
+      "total_paid_usd": 149
     }
   ]
 }

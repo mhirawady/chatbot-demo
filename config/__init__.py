@@ -1,18 +1,32 @@
 """Static configuration for the airline customer service chatbot demo."""
 
+import os
 from pathlib import Path
 from typing import Literal
 
+from dotenv import load_dotenv
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+load_dotenv(PROJECT_ROOT / ".env")
 
 ProviderName = Literal["anthropic", "openrouter"]
 
 ACTIVE_PROVIDER: ProviderName = "anthropic"
 
-# DEMO ONLY: deliberate exception to the repo rule against hardcoded credentials.
-# Replace locally and never commit a real key.
-ANTHROPIC_API_KEY = "REPLACE_ME"
-OPENROUTER_API_KEY = "REPLACE_ME"
+
+def _require_env(name: str) -> str:
+    value = os.environ.get(name)
+    if not value:
+        raise RuntimeError(
+            f"{name} is not set. Copy .env.example to .env and fill it in."
+        )
+    return value
+
+
+# Real keys live in .env (gitignored), never in this file.
+ANTHROPIC_API_KEY = _require_env("ANTHROPIC_API_KEY")
+OPENROUTER_API_KEY = _require_env("OPENROUTER_API_KEY")
 
 ANTHROPIC_MODEL = "claude-sonnet-5"
 OPENROUTER_MODEL = "anthropic/claude-sonnet-5"

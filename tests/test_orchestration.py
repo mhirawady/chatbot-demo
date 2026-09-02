@@ -37,7 +37,7 @@ def _booking_call(call_id: str = "c1") -> ToolCall:
     return ToolCall(
         id=call_id,
         name="get_booking",
-        arguments={"booking_reference": "MR7QX2", "last_name": "Alvarez"},
+        arguments={"booking_code": "GH7X2P", "last_name": "Webb"},
     )
 
 
@@ -111,7 +111,7 @@ def test_end_conversation_takes_priority_over_other_tool_calls() -> None:
     )
     orchestrator = Orchestrator(provider, model="test-model")
 
-    result = orchestrator.handle_input("Check MR7QX2, then never mind")
+    result = orchestrator.handle_input("Check GH7X2P, then never mind")
 
     assert result.outcome is TurnOutcome.RESET
     assert len(provider.calls) == 1
@@ -120,13 +120,13 @@ def test_end_conversation_takes_priority_over_other_tool_calls() -> None:
 def test_tool_result_is_fed_back_to_provider() -> None:
     provider = ScriptedProvider(
         ProviderResponse(tool_calls=(_booking_call(),)),
-        ProviderResponse(text="You're on MR418 to JFK."),
+        ProviderResponse(text="You're on SH412 to SFO."),
     )
     orchestrator = Orchestrator(provider, model="test-model")
 
-    result = orchestrator.handle_input("Look up MR7QX2 for Alvarez")
+    result = orchestrator.handle_input("Look up GH7X2P for Webb")
 
-    assert result.reply == "You're on MR418 to JFK."
+    assert result.reply == "You're on SH412 to SFO."
     tool_results = provider.calls[1][-1].tool_results
     assert tool_results[0].content["status"] == "found"
 
@@ -136,7 +136,7 @@ def test_turn_aborts_after_max_roundtrips() -> None:
     provider = ScriptedProvider(*looping)
     orchestrator = Orchestrator(provider, model="test-model")
 
-    result = orchestrator.handle_input("Look up MR7QX2 for Alvarez")
+    result = orchestrator.handle_input("Look up GH7X2P for Webb")
 
     assert result.reply == TOOL_LIMIT_MESSAGE
     assert result.outcome is TurnOutcome.CONTINUE

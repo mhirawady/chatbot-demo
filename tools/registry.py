@@ -12,9 +12,14 @@ _SCHEMAS: dict[str, ToolSchema] = {}
 
 
 def register_tool(
-    name: str, schema: dict[str, Any]
+    name: str, schema: dict[str, Any], extra_description: str = ""
 ) -> Callable[[ToolHandler], ToolHandler]:
-    """Register a handler under `name` with its JSON input schema."""
+    """Register a handler under `name` with its JSON input schema.
+
+    `extra_description` is appended after the handler's docstring, useful for
+    API terminology or formatting notes that don't belong in the docstring
+    itself.
+    """
 
     def decorator(handler: ToolHandler) -> ToolHandler:
         if name in _HANDLERS:
@@ -22,6 +27,8 @@ def register_tool(
         description = (handler.__doc__ or "").strip()
         if not description:
             raise ValueError(f"Tool {name} needs a docstring for its description")
+        if extra_description:
+            description = f"{description}\n\n{extra_description}"
         _HANDLERS[name] = handler
         _SCHEMAS[name] = ToolSchema(
             name=name, description=description, input_schema=schema

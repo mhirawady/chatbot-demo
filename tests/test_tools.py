@@ -28,11 +28,18 @@ def test_schema_shape(schemas: dict[str, Any], name: str) -> None:
     assert "properties" in schema.input_schema
 
 
-def test_get_booking_schema_requires_reference_and_name(
+def test_get_booking_schema_requires_code_and_name(
     schemas: dict[str, Any],
 ) -> None:
     required = schemas["get_booking"].input_schema["required"]
-    assert set(required) == {"booking_reference", "last_name"}
+    assert set(required) == {"booking_code", "last_name"}
+
+
+def test_get_booking_description_includes_terminology_note(
+    schemas: dict[str, Any],
+) -> None:
+    assert "booking code" in schemas["get_booking"].description
+    assert "reservation code" in schemas["get_booking"].description
 
 
 def test_get_flight_status_schema_requires_number_and_date(
@@ -47,39 +54,33 @@ def test_end_conversation_takes_no_arguments(schemas: dict[str, Any]) -> None:
 
 
 def test_dispatch_get_booking_found() -> None:
-    result = dispatch(
-        "get_booking", {"booking_reference": "mr7qx2", "last_name": "alvarez"}
-    )
+    result = dispatch("get_booking", {"booking_code": "gh7x2p", "last_name": "webb"})
     assert result["status"] == "found"
-    assert result["record"]["fare_type"] == "Main Economy"
+    assert result["record"]["booking_code"] == "GH7X2P"
 
 
 def test_dispatch_get_booking_not_found() -> None:
-    result = dispatch(
-        "get_booking", {"booking_reference": "ZZ9999", "last_name": "Nobody"}
-    )
+    result = dispatch("get_booking", {"booking_code": "ZZ9999", "last_name": "Nobody"})
     assert result["status"] == "not_found"
     assert "record" not in result
 
 
-def test_dispatch_get_booking_invalid_reference() -> None:
-    result = dispatch(
-        "get_booking", {"booking_reference": "??", "last_name": "Alvarez"}
-    )
+def test_dispatch_get_booking_invalid_code() -> None:
+    result = dispatch("get_booking", {"booking_code": "??", "last_name": "Webb"})
     assert result["status"] == "invalid_input"
 
 
 def test_dispatch_get_flight_status_found() -> None:
     result = dispatch(
-        "get_flight_status", {"flight_number": "mr226", "date": "2026-09-02"}
+        "get_flight_status", {"flight_number": "sh412", "date": "2026-07-09"}
     )
     assert result["status"] == "found"
-    assert result["record"]["status"] == "delayed"
+    assert result["record"]["status"] == "CANCELLED"
 
 
 def test_dispatch_get_flight_status_rejects_bad_date() -> None:
     result = dispatch(
-        "get_flight_status", {"flight_number": "MR226", "date": "02/09/2026"}
+        "get_flight_status", {"flight_number": "SH412", "date": "09/07/2026"}
     )
     assert result["status"] == "invalid_input"
 
