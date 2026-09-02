@@ -34,7 +34,7 @@ OPENROUTER_MODEL = "anthropic/claude-sonnet-5"
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 
 MAX_TOKENS = 2048
-REQUEST_TIMEOUT_SECONDS = 60
+REQUEST_TIMEOUT_SECONDS = 120
 
 # Provider round-trips allowed per user turn before the turn is abandoned.
 MAX_TOOL_ROUNDTRIPS = 3

@@ -73,7 +73,7 @@ Notable constants in `config/__init__.py`:
 | `ANTHROPIC_MODEL` | `claude-sonnet-5` | Model ID for the Anthropic path |
 | `OPENROUTER_MODEL` | `anthropic/claude-sonnet-5` | Model ID for the OpenRouter path |
 | `MAX_TOKENS` | `2048` | Response cap per call |
-| `REQUEST_TIMEOUT_SECONDS` | `60` | HTTP timeout |
+| `REQUEST_TIMEOUT_SECONDS` | `120` | HTTP timeout |
 | `MAX_TOOL_ROUNDTRIPS` | `3` | Tool calls allowed per user turn before the turn is abandoned |
 | `RESET_PHRASES` | see file | Keyword backstop for conversation reset |
 
