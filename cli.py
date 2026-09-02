@@ -1,4 +1,4 @@
-"""Interactive CLI for the Meridian Airlines customer service agent."""
+"""Interactive CLI for the SkyHop Airlines customer service agent."""
 
 import sys
 
