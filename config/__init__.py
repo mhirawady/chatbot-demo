@@ -37,7 +37,7 @@ MAX_TOKENS = 2048
 REQUEST_TIMEOUT_SECONDS = 120
 
 # Provider round-trips allowed per user turn before the turn is abandoned.
-MAX_TOOL_ROUNDTRIPS = 3
+MAX_TOOL_ROUNDTRIPS = 10
 
 PERSONA_PATH = PROJECT_ROOT / "config" / "persona.md"
 POLICIES_PATH = PROJECT_ROOT / "knowledge_base" / "policies.md"
