@@ -12,7 +12,7 @@ load_dotenv(PROJECT_ROOT / ".env")
 
 ProviderName = Literal["anthropic", "openrouter"]
 
-ACTIVE_PROVIDER: ProviderName = "anthropic"
+ACTIVE_PROVIDER: ProviderName = "openrouter"
 
 
 def _require_env(name: str) -> str:
@@ -56,6 +56,11 @@ RESET_PHRASES = (
     "something else",
     "change the subject",
     "reset",
+)
+
+WELCOME_MESSAGE = (
+    "Hi, I'm Sunny with SkyHop Airlines. I can help with bookings, flight "
+    "status, changes, and cancellations — what can I do for you today?"
 )
 
 CLOSING_LINE = (

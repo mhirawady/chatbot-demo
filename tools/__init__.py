@@ -1,6 +1,11 @@
 """Tool registry. Importing this package registers every tool."""
 
-from tools import end_conversation, get_booking, get_flight_status  # noqa: F401
+from tools import (  # noqa: F401
+    end_conversation,
+    get_booking,
+    get_flight_status,
+    search_flights,
+)
 from tools.end_conversation import TOOL_NAME as END_CONVERSATION_TOOL
 from tools.registry import dispatch, get_tool_schemas, register_tool
 

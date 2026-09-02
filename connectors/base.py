@@ -36,6 +36,7 @@ class LookupResult:
 
     status: LookupStatus
     record: dict[str, Any] | None = None
+    records: list[dict[str, Any]] | None = None
     message: str | None = None
     details: dict[str, Any] = field(default_factory=dict)
 
@@ -44,6 +45,8 @@ class LookupResult:
         payload: dict[str, Any] = {"status": self.status.value}
         if self.record is not None:
             payload["record"] = self.record
+        if self.records is not None:
+            payload["records"] = self.records
         if self.message is not None:
             payload["message"] = self.message
         if self.details:
@@ -51,13 +54,18 @@ class LookupResult:
         return payload
 
 
-def load_json_records(path: Path, key: str) -> list[dict[str, Any]]:
-    """Read a list of records from a mock data file."""
+def load_json_document(path: Path) -> dict[str, Any]:
+    """Read a mock data file's full JSON document, including its meta block."""
     if not path.is_file():
         raise FileNotFoundError(f"Mock data file not found: {path}")
     with path.open(encoding="utf-8") as handle:
-        data = json.load(handle)
-    records = data.get(key)
+        data: dict[str, Any] = json.load(handle)
+    return data
+
+
+def load_json_records(path: Path, key: str) -> list[dict[str, Any]]:
+    """Read a list of records from a mock data file."""
+    records = load_json_document(path).get(key)
     if not isinstance(records, list):
         raise ValueError(f"Expected a list under '{key}' in {path}")
     return records

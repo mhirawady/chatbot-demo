@@ -2,11 +2,11 @@
 
 import sys
 
-from config import ACTIVE_PROVIDER
+from config import ACTIVE_PROVIDER, WELCOME_MESSAGE
 from orchestration import Orchestrator, TurnOutcome
 from providers import build_provider, resolve_model
 
-BANNER = """Meridian Airlines — customer service assistant
+BANNER = """SkyHop Airlines — customer service assistant
 Provider: {provider} ({model})
 
 Type your question, or "exit" to quit.
@@ -15,7 +15,7 @@ Type your question, or "exit" to quit.
 
 def _print_reply(reply: str | None) -> None:
     if reply:
-        print(f"\nAvery: {reply}\n")
+        print(f"\nSunny: {reply}\n")
 
 
 def main() -> int:
@@ -24,6 +24,7 @@ def main() -> int:
     orchestrator = Orchestrator(build_provider(provider_name), model)
 
     print(BANNER.format(provider=provider_name, model=model))
+    _print_reply(WELCOME_MESSAGE)
 
     while True:
         try:

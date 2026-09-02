@@ -8,7 +8,12 @@ import tools
 from tools import dispatch, get_tool_schemas
 from tools.end_conversation import TOOL_NAME as END_CONVERSATION_TOOL
 
-EXPECTED_TOOLS = {"get_booking", "get_flight_status", END_CONVERSATION_TOOL}
+EXPECTED_TOOLS = {
+    "get_booking",
+    "get_flight_status",
+    "search_flights",
+    END_CONVERSATION_TOOL,
+}
 
 
 @pytest.fixture(scope="module")
@@ -49,6 +54,14 @@ def test_get_flight_status_schema_requires_number_and_date(
     assert set(required) == {"flight_number", "date"}
 
 
+def test_search_flights_schema_requires_origin_and_destination_only(
+    schemas: dict[str, Any],
+) -> None:
+    required = schemas["search_flights"].input_schema["required"]
+    assert set(required) == {"origin", "destination"}
+    assert "date" in schemas["search_flights"].input_schema["properties"]
+
+
 def test_end_conversation_takes_no_arguments(schemas: dict[str, Any]) -> None:
     assert schemas[END_CONVERSATION_TOOL].input_schema["properties"] == {}
 
@@ -83,6 +96,20 @@ def test_dispatch_get_flight_status_rejects_bad_date() -> None:
         "get_flight_status", {"flight_number": "SH412", "date": "09/07/2026"}
     )
     assert result["status"] == "invalid_input"
+
+
+def test_dispatch_search_flights_without_date() -> None:
+    result = dispatch("search_flights", {"origin": "den", "destination": "sfo"})
+    assert result["status"] == "found"
+    assert len(result["records"]) == 3
+
+
+def test_dispatch_search_flights_offers_alternative_dates() -> None:
+    result = dispatch(
+        "search_flights", {"origin": "DEN", "destination": "SFO", "date": "2026-07-15"}
+    )
+    assert result["status"] == "not_found"
+    assert result["details"]["alternative_dates"] == ["2026-07-09", "2026-07-10"]
 
 
 def test_dispatch_end_conversation() -> None:

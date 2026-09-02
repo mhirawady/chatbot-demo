@@ -70,6 +70,51 @@ def test_lookup_payload_omits_missing_fields() -> None:
     assert "message" not in payload
 
 
+def test_route_search_excludes_cancelled_and_past_flights() -> None:
+    result = get_flights_connector().find_by_route("DEN", "SFO")
+    assert result.status is LookupStatus.FOUND
+    assert result.records is not None
+    flight_numbers = {r["flight_number"] for r in result.records}
+    assert flight_numbers == {"TN2205", "SH420", "SH424"}
+
+
+def test_route_search_is_case_insensitive() -> None:
+    result = get_flights_connector().find_by_route("den", "sfo")
+    assert result.status is LookupStatus.FOUND
+
+
+def test_route_search_filters_by_date() -> None:
+    result = get_flights_connector().find_by_route("DEN", "SFO", "2026-07-10")
+    assert result.status is LookupStatus.FOUND
+    assert result.records is not None
+    flight_numbers = {r["flight_number"] for r in result.records}
+    assert flight_numbers == {"SH420", "SH424"}
+
+
+def test_route_search_offers_alternative_dates_when_requested_date_has_none() -> None:
+    result = get_flights_connector().find_by_route("DEN", "SFO", "2026-07-15")
+    assert result.status is LookupStatus.NOT_FOUND
+    assert result.details["alternative_dates"] == ["2026-07-09", "2026-07-10"]
+
+
+def test_route_search_not_found_for_unserved_route() -> None:
+    result = get_flights_connector().find_by_route("DEN", "MIA")
+    assert result.status is LookupStatus.NOT_FOUND
+    assert "alternative_dates" not in result.details
+
+
+def test_route_search_rejects_bad_airport_code() -> None:
+    result = get_flights_connector().find_by_route("DENV", "SFO")
+    assert result.status is LookupStatus.INVALID_INPUT
+
+
+def test_route_search_humanizes_departure_times() -> None:
+    result = get_flights_connector().find_by_route("DEN", "SFO", "2026-07-10")
+    assert result.records is not None
+    departures = {r["departure"] for r in result.records}
+    assert "Friday Jul 10, 2026 7:05AM" in departures
+
+
 def test_policy_kb_returns_policy_text() -> None:
     content = get_policy_kb().search("baggage")
     assert "SkyHop Airlines" in content
