@@ -1,0 +1,25 @@
+{
+  "id": "gen-tool-call",
+  "model": "anthropic/claude-sonnet-5",
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "tool_calls",
+      "message": {
+        "role": "assistant",
+        "content": "Let me pull that booking up.",
+        "tool_calls": [
+          {
+            "id": "call_01ABC",
+            "type": "function",
+            "function": {
+              "name": "get_booking",
+              "arguments": "{\"booking_reference\": \"MR7QX2\", \"last_name\": \"Alvarez\"}"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

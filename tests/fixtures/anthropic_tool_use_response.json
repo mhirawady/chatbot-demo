@@ -1,0 +1,22 @@
+{
+  "id": "msg_01ToolUse",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-sonnet-5",
+  "stop_reason": "tool_use",
+  "content": [
+    {
+      "type": "text",
+      "text": "Let me pull that booking up."
+    },
+    {
+      "type": "tool_use",
+      "id": "toolu_01ABC",
+      "name": "get_booking",
+      "input": {
+        "booking_reference": "MR7QX2",
+        "last_name": "Alvarez"
+      }
+    }
+  ]
+}

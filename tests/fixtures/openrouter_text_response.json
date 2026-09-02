@@ -1,0 +1,16 @@
+{
+  "id": "gen-text-only",
+  "model": "anthropic/claude-sonnet-5",
+  "object": "chat.completion",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "content": "Main Economy tickets can be changed with no change fee — you'd just pay any fare difference.",
+        "tool_calls": null
+      }
+    }
+  ]
+}
