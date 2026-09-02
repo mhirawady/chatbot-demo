@@ -4,7 +4,7 @@ An airline customer service chatbot demo. "Sunny" is a support agent for the
 fictional SkyHop Airlines who answers policy questions and looks up booking and
 flight data through LLM tool calls.
 
-The point of the project is the shape, not the airline. It's a small, readable
+The purpose of the project is to showcase the shape, not the airline. It's a small, readable
 reference for a tool-calling agent with a provider-agnostic core: swap the LLM
 backend or replace the mock data layer with a real API without touching the
 orchestration logic.
