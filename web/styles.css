@@ -57,18 +57,30 @@ body {
 
 .brand {
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas:
-    "name action"
-    "sub action";
-  gap: 0.15rem 1rem;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "logo copy action";
+  gap: 0.75rem 0.9rem;
   align-items: center;
   padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--line);
 }
 
+.brand-logo {
+  grid-area: logo;
+  width: 3.25rem;
+  height: 3.25rem;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 50%;
+  box-shadow: 0 8px 20px rgba(8, 54, 95, 0.18);
+}
+
+.brand-copy {
+  grid-area: copy;
+  min-width: 0;
+}
+
 .brand-name {
-  grid-area: name;
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 4vw, 2.35rem);
@@ -79,8 +91,7 @@ body {
 }
 
 .brand-sub {
-  grid-area: sub;
-  margin: 0;
+  margin: 0.15rem 0 0;
   color: var(--ink-muted);
   font-size: 0.95rem;
 }
