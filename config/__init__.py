@@ -12,7 +12,7 @@ load_dotenv(PROJECT_ROOT / ".env")
 
 ProviderName = Literal["anthropic", "openrouter"]
 
-ACTIVE_PROVIDER: ProviderName = "openrouter"
+ACTIVE_PROVIDER: ProviderName = "anthropic"
 
 
 def _require_env(name: str) -> str:

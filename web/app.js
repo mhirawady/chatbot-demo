@@ -91,7 +91,7 @@ async function startNewChat() {
   } catch (err) {
     appendBubble(
       "assistant",
-      err instanceof Error ? err.message : "Something went wrong starting the chat.",
+      err instanceof Error ? err.message : "Something went wrong when starting the chat.",
     );
   } finally {
     setBusy(false);
