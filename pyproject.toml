@@ -7,6 +7,8 @@ dependencies = [
     "anthropic>=0.40.0",
     "requests>=2.32.0",
     "python-dotenv>=1.0.0",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
 ]
 
 [dependency-groups]
@@ -15,6 +17,7 @@ dev = [
     "ruff>=0.16.5",
     "pytest>=8.0.0",
     "types-requests>=2.32.0",
+    "httpx>=0.28.1",
 ]
 
 [tool.pytest.ini_options]

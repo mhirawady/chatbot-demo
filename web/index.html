@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SkyHop Airlines — Sunny</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
+  </head>
+  <body>
+    <div class="sky" aria-hidden="true"></div>
+    <main class="shell">
+      <header class="brand">
+        <img
+          class="brand-logo"
+          src="/static/logo.svg"
+          alt=""
+          width="56"
+          height="56"
+        />
+        <div class="brand-copy">
+          <p class="brand-name">SkyHop Airlines</p>
+          <p class="brand-sub">Chat with Sunny</p>
+        </div>
+        <button type="button" class="new-chat" id="new-chat">New chat</button>
+      </header>
+
+      <section class="transcript" id="transcript" aria-live="polite"></section>
+
+      <form class="composer" id="composer">
+        <label class="sr-only" for="message">Your message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="1"
+          placeholder="Ask about a booking, flight status, or policy…"
+          required
+        ></textarea>
+        <button type="submit" id="send" aria-label="Send message">Send</button>
+      </form>
+    </main>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

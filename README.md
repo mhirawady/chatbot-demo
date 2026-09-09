@@ -9,12 +9,12 @@ reference for a tool-calling agent with a provider-agnostic core: swap the LLM
 backend or replace the mock data layer with a real API without touching the
 orchestration logic.
 
-- Interactive terminal chat, no server or frontend
+- Interactive terminal chat, plus an optional FastAPI web UI
 - Pluggable LLM providers behind a single abstract interface (Anthropic, OpenRouter)
 - Four LLM-callable tools registered by decorator
 - Mock airline APIs backed by JSON, behind a connector boundary
 - Policy answers grounded in a knowledge base file, with a "don't guess" guardrail
-- ~62 tests, no live API calls
+- ~68 tests, no live API calls
 
 ## Requirements
 
@@ -51,6 +51,15 @@ You:
 
 Type `exit` or `quit` to leave. Ctrl+C and Ctrl+D also exit cleanly. Saying
 something like "let's start over" resets the conversation without quitting.
+
+### Web UI
+
+```bash
+uv run uvicorn server:app --reload
+```
+
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Same `.env` keys as the CLI.
+Uses in-memory sessions; each browser tab gets its own conversation.
 
 ## Configuration
 
@@ -98,7 +107,7 @@ Useful booking codes from `mock_data/bookings.json`: `GH7X2P` (Webb),
 ## Architecture
 
 ```
-cli.py                    stdin/stdout loop
+cli.py / server.py        stdin/stdout loop, or FastAPI + static web UI
    |
    v
 Orchestrator              agent loop, tool roundtrips, reset/exit control
@@ -160,6 +169,8 @@ markdown file requires a restart to take effect.
 
 ```
 cli.py                       entry point, REPL
+server.py                    FastAPI app + session API for the web UI
+web/                         static chat UI (HTML/CSS/JS)
 orchestration.py             agent loop, turn outcomes
 session.py                   in-memory transcript
 prompt_loader.py             persona + policies -> system prompt
